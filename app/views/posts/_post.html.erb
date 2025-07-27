@@ -1,0 +1,10 @@
+<div class="border rounded p-4 shadow hover:shadow-md transition">
+  <h2 class="text-xl font-semibold text-gray-800 mb-1"><%= post.title %></h2>
+  <p class="text-sm text-gray-500 mb-2">
+    Published: <%= post.published ? "Yes" : "no" %>
+    <% if post.published_at.present? %> |
+      <%= post.published_at.strftime("%B %d, %Y %l:%M %p") %>
+    <% end %>
+  </p>
+  <p class="text-gray-700"><%= truncate(post.body, length: 100) %></p>
+</div>

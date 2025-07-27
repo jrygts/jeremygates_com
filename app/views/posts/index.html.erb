@@ -1,0 +1,16 @@
+<p class="text-green-600 mb-4"><%= notice %></p>
+
+<% content_for :title, "Posts" %>
+
+<h1 class="text-4xl font-bold text-blue-600 mb-6">Posts</h1>
+
+<%= link_to "New post", new_post_path, class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition inline-block mb-6" %>
+
+<div id="posts" class="space-y-4">
+  <% @posts.each do |post| %>
+    <%= render post %>
+    <p>
+      <%= link_to "Show this post", post, class: "text-blue-500 hover:underline text-sm" %>
+    </p>
+  <% end %>
+</div>
