@@ -1,6 +1,5 @@
-class PostsController < ApplicationController
-  http_basic_authenticate_with name: "admin", password: "Patches22@", except: [:index, :show]
-  before_action :set_post, only: %i[ show edit update destroy ]
+class PostsController < ApplicationControllerhttp_basic_authenticate_with name: ENV["BLOG_ADMIN_USER"], password: "Patches22@", except: [ :index, :show ]
+http_basic_authenticate_with name: ENV["BLOG_ADMIN_USER"], password: ENV["BLOG_ADMIN_PASS"], except: [ :index, :show ]
 
   # GET /posts or /posts.json
   def index
