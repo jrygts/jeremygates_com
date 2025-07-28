@@ -1,11 +1,22 @@
 <% content_for :title, "Home" %>
 
 <div class="max-w-3xl mx-auto px-4 py-12 prose">
-  <p class="text-xl font-semibold mb-4">
-    Welcome!
-  </p>
+  <!-- Title is in layout; here we just list posts -->
 
-  <p class="text-lg">
-    <%= link_to "Posts", posts_path, class: "hover:underline" %>
-  </p>
+  <% if @posts.any? %>
+    <ul class="list-disc list-inside space-y-2">
+      <% @posts.each do |post| %>
+        <li>
+          <%= link_to post.title, post_path(post), class: "text-xl hover:underline" %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No posts yet.</p>
+  <% end %>
+
+  <div class="mt-8 text-center">
+    <% link_to "View more posts", posts_path,
+      class: "inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition" %>
+  </div>
 </div>
