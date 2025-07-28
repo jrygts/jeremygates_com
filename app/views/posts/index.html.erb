@@ -10,7 +10,9 @@
   <% @posts.each do |post| %>
     <%= render post %>
     <p>
-      <%= link_to "Show this post", post, class: "text-blue-500 hover:underline text-sm" %>
+      <%= if request.authorization.present? %>
+        <%= link_to "Show this post", post, class: "text-blue-500 hover:underline text-sm" %>
+      <% end %>
     </p>
   <% end %>
 </div>
