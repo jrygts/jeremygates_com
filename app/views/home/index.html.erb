@@ -1,15 +1,11 @@
-<h1 class="text-4xl font-bold text-blue-600">Welcome to Jeremy's Blog</h1>
-<p class="text-lg text-gray-700 mb-6">I'm learning Rails by building a blog from scratch.</p>
+<% content_for :title, "Home" %>
 
-<div class="mb-8">
-  <%= link_to "View All Posts", posts_path, class: "btn" %>
+<div class="max-w-3xl mx-auto px-4 py-12 prose">
+  <p class="text-xl font-semibold mb-4">
+    Welcome!
+  </p>
+
+  <p class="text-lg">
+    <%= link_to "Posts", posts_path, class: "hover:underline" %>
+  </p>
 </div>
-
-<h2 class ="text-2xl font-semibold mb-3">Recent Posts</h2>
-<ul class="space-y-2">
-  <% @recent_posts.each do |post| %>
-    <li>
-      <%= link_to post.title, post_path(post), class: "text-gray-800 hover:text-blue-600 hover:underline" %>
-    </li>
-  <% end %>
-</ul>
