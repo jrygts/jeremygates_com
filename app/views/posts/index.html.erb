@@ -1,8 +1,7 @@
-<% content_for :title, "Blog" %>
+<% content_for :title, "Posts" %>
+<% content_for :header, "Posts"
 
 <div class="max-w-3xl mx-auto px-4 py-12 prose">
-  <h1 class="text-3xl font-bold mb-8">Posts</h1>
-
   <% if @posts.any? %>
     <% @posts.each do |post| %>
       <article class="mb-12">
