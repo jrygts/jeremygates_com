@@ -4,13 +4,15 @@
 
 <h1 class="text-4xl font-bold text-blue-600 mb-6">Posts</h1>
 
-<%= link_to "New post", new_post_path, class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition inline-block mb-6" %>
+<% if request.authorization.present? %>
+  <%= link_to "New post", new_post_path, class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition inline-block mb-6" %>
+<% end %>
 
 <div id="posts" class="space-y-4">
   <% @posts.each do |post| %>
     <%= render post %>
     <p>
-      <%= if request.authorization.present? %>
+      <% if request.authorization.present? %>
         <%= link_to "Show this post", post, class: "text-blue-500 hover:underline text-sm" %>
       <% end %>
     </p>
