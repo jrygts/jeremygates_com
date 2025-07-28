@@ -1,38 +1,22 @@
-<% content_for :title, "Posts" %>
+<% content_for :title, "Blog" %>
 
-<h1 class="text-4xl font-bold mb-8">Posts</h1>
+<div class="max-w-3xl mx-auto px-4 py-12 prose">
+  <h1 class="text-3xl font-bold mb-8">Jeremy Gates</h1>
 
-<% if notice.present? %>
-  <p class="text-green-600 mb-4"><%= notice %></p>
-<% end %>
-
-<% if request.authorization.present? %>
-  <%= link_to "New post", new_post_path,
-    class: "inline-block mb-8 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition" %>
-<% end %>
-
-<div class="space-y-12">
-  <% @posts.each do |post| %>
-    <article class="prose max-w-none bg-white p-6 rounded-lg shadow">
-      <h2 class="text-2xl font-semibold">
-        <%= link_to post.title, post, class: "hover:underline" %>
-      </h2>
-      <p class="text-sm text-gray-500">
-        Posted <%= time_ago_in_words(post.created_at) %> ago
-      </p>
-      <p>
-        <%= truncate(post.body, length: 200) %>
-      </p>
-
-      <p>
-        <%= link_to "Read more", post, class: "text-blue-600 hover:underline" %>
-        <% if request.authorization.present? %>
-          &middot; <%= link_to "Edit", edit_post_path(post), class: "text-yellow-600 hover:underline" %>
-          &middot; <%= link_to "Delete", post, method: :delete,
-            data: { confirm: "Are you sure?" },
-            class: "text-red-600 hover:underline" %>
-        <% end %>
-      </p>
-    </article>
+  <% if @posts.any? %>
+    <% @posts.each do |post| %>
+      <article class="mb-12">
+        <h2 class="text-2xl font-semibold mb-1">
+          <%= link_to post.title, post, class: "hover:underline" %>
+        </h2>
+        <p class="text-sm text-gray-500 mb-2">
+          <%= post.created_at.strftime("%B %e, %Y") %>
+        </p>
+        <p class="mb-4"><%= truncate(post.body, length: 200) %></p>
+          <%= link_to "Read more ->", post, class: "text-sm hover:underline" %>
+      </article>
+    <% end %>
+  <% else %>
+    <p>No posts yet. <%= link_to "Create one", new_post_path %></p>
   <% end %>
 </div>
