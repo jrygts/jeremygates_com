@@ -6,7 +6,7 @@
     Posted <%= @post.created_at.strftime("%B %e, %Y at %l:%M %p") %>
   </p>
 
-  <div class="prose prose-gray max-w-none">
+  <div class="prose max-w-none">
     <%= simple_format(@post.body) %>
   </div>
 
