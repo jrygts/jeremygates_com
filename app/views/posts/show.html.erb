@@ -1,8 +1,9 @@
 <% content_for :title, @post.title %>
+
 <div class="max-w-3xl mx-auto px-4 py-12 font-serif leading-relaxed tracking-wide text-gray-800">
   <h1 class="text-4xl font-bold mb-4"><%= @post.title %></h1>
   <p class="text-sm text-gray-500 mb-8">
-    Posted <%= @post.created_at.strftime("%B %d, %Y") %>
+    Posted <%= @post.created_at.strftime("%B %e, %Y at %l:%M %p") %>
   </p>
 
   <div class="prose prose-gray max-w-none">
@@ -11,8 +12,10 @@
 
   <% if request.authorization.present? %>
     <div class="mt-8 space-x-4">
-      <%= link_to "Edit", edit_post_path(@post), class: "textsm text-yellow-600 hover:underline" %>
-      <%= link_to "Delete", @post, method: :delete, data: { confirm: "Are you sure?" }, class: "text-sm text-red-60o0 hover:underline" %>
+      <%= link_to "Edit", edit_post_path(@post), class: "text-yellow-600 hover:underline text-sm" %>
+      <%= link_to "Delete", @post, method: :delete,
+        data: { confirm: "Are you sure?" },
+        class: "text-sm text-red-600 hover:underline" %>
     </div>
   <% end %>
 </div>
