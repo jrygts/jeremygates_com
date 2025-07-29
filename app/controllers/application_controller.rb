@@ -1,4 +1,11 @@
 class ApplicationController < ActionController::Base
-  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
-  allow_browser versions: :modern
+if Rails.env.production?
+  http_basic_authenticate_with \
+    name: ENV.fetch("BLOG_ADMIN_USER"),
+    password: ENV.fetch("BLOG_ADMIN_PASS"),
+    except: [ :index, :show ]
+end
+
+  # before_action :set_post, only: %i[show edit update destroy]
+  # ...
 end

@@ -1,29 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title><%= content_for?(:title) ? yield(:title) : "My Blog" %></title>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-gray-50 font-serif text-gray-900">
-    <!-- Site header -->
-    <header class="bg-white border-b mb-8">
-      <div class="max-w-3xl mx-auto px-4 py-4 text-center">
-        <h1 class="text-2xl font-bold">
-          <% if content_for?(:header) %>
-            <%= yield(:header) %>
+  <body class="min-h-screen bg-gray-50 text-gray-900 antialiased">
+    <% unless controller_name == "posts" && action_name == "show" %>
+      <header class="container mx-auto my-8">
+        <% if controller_name == "home" && action_name == "index" %>
+          <h1 class="text-5xl font-bold text-center">Jeremy Gates</h1>
+          <h2 class="text-2xl font-semibold text-center mt-2">Posts</h2>
+        <% elsif controller_name == "posts" && action_name == "index" %>
+          <h1 class="text-4xl font-bold text-center">Posts</h1>
+        <% else %>
+          <% if content_for?(:title) %>
+            <h1 class="text-4xl font-bold text-center"><%= yield :title %></h1>
           <% else %>
-            Jeremy Gates
+            <h1 class="text-4xl font-bold text-center">Posts</h1>
           <% end %>
-        </h1>
-      </div>
-    </header>
+        <% end %>
+      </header>
+    <% end %>
 
-    <div class="max-w-3xl mx-auto px-4">
-      <%= yield %>
+    <div class="container mx-auto px-4">
+      <% flash.each do |type, message| %>
+        <div class="mb-4 rounded-lg border px-4 py-3 text-sm
+          <%= type.to_s == 'alert' ? 'border-red-300 bg-red-50 text-red-800' : 'border-green-300 bg-green-50 text-green-800' %>">
+      <%= message %>
+    </div>
+  <% end %>
+
+  <main>
+    <%= yield %>
+  </main>
     </div>
   </body>
 </html>
